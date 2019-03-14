@@ -1,10 +1,2 @@
-# test
-This is a simple test.
-
-# change no.1
-This is a simple change.
-
-# change no.2
-This is a more complex change!
-
-# made a change from home!
+# Lazymap
+Simply loads any maps created with Google Maps API when it comes visibile in the viewport.
