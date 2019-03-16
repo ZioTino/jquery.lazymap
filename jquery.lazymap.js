@@ -23,7 +23,7 @@ window.gmapScriptLoaded = function(){
             culture: '' // Supported language code according to https://developers.google.com/maps/faq#languagesupport
         }, options);
 
-        // Functions
+        // Timing functions
         function debounce (delay, fn) {
             var timer = null;
 			return function() {
@@ -59,7 +59,7 @@ window.gmapScriptLoaded = function(){
             var obj = this; // Original object where all the settings are located via data attribute
             if (this.lazymap || !$(this).hasClass('map')) return; // If it's not the correct element, return nothing.
             
-            this.lazymap = {
+            obj.lazymap = {
                 latitude: 0,
                 longitude: 0,
                 zoom: 0,
@@ -89,8 +89,6 @@ window.gmapScriptLoaded = function(){
                     O.zoom = parseInt($(obj).attr($settings.zoomAttribute));
                     // FEATURE: Add the possibility to style the map (i.e. with https://snazzymaps.com/)
                     var position = new google.maps.LatLng(O.latitude, O.longitude);
-                    // var position = new google.maps.LatLng(41.898743, 12.498862);
-                    //var position = {lat: 41.898743, lng: 12.498862};
                     var map = new google.maps.Map(obj, {
                         center: position,
                         zoom: O.zoom
@@ -98,13 +96,14 @@ window.gmapScriptLoaded = function(){
                     var marker = new google.maps.Marker({
                         position: position,
                         map: map,
-                        animation: google.maps.Animation.DROP
+                        animation: google.maps.Animation.DROP,
+                        icon: ''  
                     });
                     $(obj).addClass('initialized');
                     
-                    // FEATURE: Add the possibility to set multiple markers
-                    // FEATURE: Add the possibility to change the marker image
-                    // FEATURE: Add the possibility to link the marker to a function or a link
+                    // FEATURE: Add the possibility to set multiple markers.
+                    // FEATURE: Add the possibility to change the marker image: HINT -> if the icon property is blank, the default icon will still be displayed.
+                    // FEATURE: Add the possibility to link the marker to a function or a link. HINT -> watch the full documentation of gmap API to see what we can do here
                 },
                 listen: function() {
                     var O = this;
