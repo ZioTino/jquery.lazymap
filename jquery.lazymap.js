@@ -120,15 +120,16 @@ window.gmapScriptLoaded = function(){
                     .on('load', function() {
                         $window.trigger('scroll');
                     })
-                },
-                init: function() {
-                    var O = this;
-                    O.listen();
-                    return O;
                 }
+                //,
+                //init: function() {
+                //    var O = this;
+                //    O.listen();
+                //    return O;
+                //}
             }
 
-            obj.lazymap.init();
+            obj.lazymap.listen();
         })
 
         return ret.length === 1 ? ret[0] : ret;
