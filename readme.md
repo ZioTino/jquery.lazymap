@@ -22,4 +22,4 @@ And then simply call lazymap after jquery:
     });
 ````
 
-This can works for as many maps as you want!
+This can works for as many maps as you want!!
