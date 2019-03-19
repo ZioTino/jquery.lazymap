@@ -12,9 +12,10 @@ window.gmapScriptLoaded = function(){
             apiScriptLoaded = false,
             apiScriptLoading = false,
             $settings = $.extend({
-                latituteAttribute: 'data-lat',
-                longitudeAttribute: 'data-lng',
-                zoomAttribute: 'data-zoom',
+                latituteAttr: 'data-lat',
+                longitudeAttr: 'data-lng',
+                zoomAttr: 'data-zoom',
+                keepAttributes: ["class"],
                 apiKey: '',
                 culture: ''
             }, options);
@@ -30,8 +31,7 @@ window.gmapScriptLoaded = function(){
         function throttle (delay, fn) {
             var last,
                 deferTimer;
-			return function()
-			{
+			return function() {
                 var context = this,
                     args = arguments,
                     now = +new Date;
@@ -54,10 +54,22 @@ window.gmapScriptLoaded = function(){
                 latitude: 0,
                 longitude: 0,
                 zoom: 0,
+                removeData: function(A) {
+                    var attributes = $.map(A.attributes, function(item) {
+                        return item.name;
+                    });
+                    $.each(attributes, function(i, attr) {
+                        $.each($settings.keepAttributes, function(keepAttr) {
+                            if (attr != keepAttr) {
+                                $(A).removeAttr(attr);
+                            }
+                        })
+                    });
+                },
                 createMap: function() {
                     var O = this;
                     windowScrollTop = $window.scrollTop();
-                    if ($(obj).hasClass('initialized'))
+                    if ($(obj).hasClass('loaded'))
                         return true;
                     if($(obj).offset().top - windowScrollTop > windowHeight * 1)
                         return true;
@@ -66,9 +78,9 @@ window.gmapScriptLoaded = function(){
                         apiScriptLoading = true;
                     }
                     if( !apiScriptLoaded ) return true;
-                    O.latitude = parseFloat($(obj).attr($settings.latituteAttribute));
-                    O.longitude = parseFloat($(obj).attr($settings.longitudeAttribute));
-                    O.zoom = parseInt($(obj).attr($settings.zoomAttribute));
+                    O.latitude = parseFloat($(obj).attr($settings.latituteAttr));
+                    O.longitude = parseFloat($(obj).attr($settings.longitudeAttr));
+                    O.zoom = parseInt($(obj).attr($settings.zoomAttr));
                     var position = new google.maps.LatLng(O.latitude, O.longitude);
                     var map = new google.maps.Map(obj, {
                         center: position,
@@ -80,7 +92,8 @@ window.gmapScriptLoaded = function(){
                         animation: google.maps.Animation.DROP,
                         icon: ''  
                     });
-                    $(obj).addClass('initialized');
+                    $(obj).addClass('loaded');
+                    O.removeData(obj);
                 },
                 listen: function() {
                     var O = this;
@@ -89,14 +102,11 @@ window.gmapScriptLoaded = function(){
                         apiScriptLoaded = true;
                         O.createMap();
                     })
-                    .on('scroll', throttle(250, O.createMap ))
+                    .on('load scroll', throttle(250, O.createMap ))
                     .on('resize', debounce(250, function() {
                         windowHeight = $window.height();
                         O.createMap();
                     }))
-                    .on('load', function() {
-                        $window.trigger('scroll');
-                    })
                 }
             }
             obj.lazymap.listen();
