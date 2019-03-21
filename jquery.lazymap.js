@@ -15,7 +15,7 @@ window.gmapScriptLoaded = function(){
                 latituteAttr: 'data-lat',
                 longitudeAttr: 'data-lng',
                 zoomAttr: 'data-zoom',
-                keepAttributes: ["class"],
+                keepAttributes: ['class'],
                 apiKey: '',
                 culture: ''
             }, options);
@@ -59,8 +59,8 @@ window.gmapScriptLoaded = function(){
                         return item.name;
                     });
                     $.each(attributes, function(i, attr) {
-                        $.each($settings.keepAttributes, function(keepAttr) {
-                            if (attr != keepAttr) {
+                        $.each($settings.keepAttributes, function(i, keepAttr) {
+                            if (attr != keepAttr && A.hasAttribute(attr)) {
                                 $(A).removeAttr(attr);
                             }
                         })
@@ -92,8 +92,8 @@ window.gmapScriptLoaded = function(){
                         animation: google.maps.Animation.DROP,
                         icon: ''  
                     });
-                    $(obj).addClass('loaded');
                     O.removeData(obj);
+                    $(obj).addClass("loaded");
                 },
                 listen: function() {
                     var O = this;
