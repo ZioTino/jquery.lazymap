@@ -12,7 +12,7 @@ window.gmapScriptLoaded = function(){
             apiScriptLoaded = false,
             apiScriptLoading = false,
             $settings = $.extend({
-                latituteAttr: 'data-lat',
+                latitudeAttr: 'data-lat',
                 longitudeAttr: 'data-lng',
                 zoomAttr: 'data-zoom',
                 keepAttributes: ['class'],
@@ -78,7 +78,7 @@ window.gmapScriptLoaded = function(){
                         apiScriptLoading = true;
                     }
                     if( !apiScriptLoaded ) return true;
-                    O.latitude = parseFloat($(obj).attr($settings.latituteAttr));
+                    O.latitude = parseFloat($(obj).attr($settings.latitudeAttr));
                     O.longitude = parseFloat($(obj).attr($settings.longitudeAttr));
                     O.zoom = parseInt($(obj).attr($settings.zoomAttr));
                     var position = new google.maps.LatLng(O.latitude, O.longitude);

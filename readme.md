@@ -5,7 +5,7 @@ You can check when the map loads by going into the Developer tools inside your b
 ## Basic usage
 As basic HTML:
 ````html
-<div class="map" data-lat="%YOURLATITUDE%" data-lng="%YOURLONGITUDE%" data-zoom="%YOURZOOM%"></div>
+<div class="map" data-lat="%YourLatitude%" data-lng="%YourLongitude%" data-zoom="%YourZoom%"></div>
 ````
 
 Include jQuery and lazymap:
@@ -17,9 +17,16 @@ Include jQuery and lazymap:
 And then simply call lazymap after jquery:
 ````javascript
     $('.map').lazymap({
-        apiKey: '',
-        culture: 'it'
+        apiKey: '%YourAPIKeyGoesHere%'
     });
 ````
 
-This can works for as many maps as you want!!
+## Additional options:
+* ***Override* the map's language** that anyway gets the browser's language as default: `culture` (*string*);
+* **Change the default html attributes** with:
+    * `latitudeAttr` *(string)*: lets you change the default attribute for map's latitude,
+    * `longitudeAttr` *(string)*: lets you change the default attribute for map's longitude,
+    * `zoomAttr` *(string)*: lets you change the default attribute for map's zoom;
+* **Add an attribute to whitelist**, preventing it to be deleted when the map is initialized: `keepAttributes` *( string[] )*;
+
+This can works for as many maps as you want!
