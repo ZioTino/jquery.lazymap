@@ -29,4 +29,4 @@ And then simply call lazymap after jquery:
     * `zoomAttr` *(string)*: lets you change the default attribute for map's zoom;
 * **Add an attribute to whitelist**, preventing it to be deleted when the map is initialized: `keepAttributes` *( string[] )*;
 
-This can works for as many maps as you want!
+This can works for as many maps as you want!!
