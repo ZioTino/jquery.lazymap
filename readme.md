@@ -7,7 +7,7 @@ You can check when the map loads by going into the Developer tools inside your b
 ## Basic usage
 As basic HTML:
 ````html
-<div class="map" data-lat="%YourLatitude%" data-lng="%YourLongitude%" data-zoom="%YourZoom%"></div>
+<div class="map" data-locations="[%YourLatitude%, %YourLongitude%]" data-zoom="%YourZoom%"></div>
 ````
 
 Include jQuery and lazymap:
@@ -18,16 +18,22 @@ Include jQuery and lazymap:
 
 And then simply call lazymap after jquery:
 ````javascript
-    $('.map').lazymap({
-        apiKey: '%YourAPIKeyGoesHere%'
-    });
+$('.map').lazymap({
+    apiKey: '%YourAPIKeyGoesHere%'
+});
 ````
+
+### How *data-locations* works?
+*data-locations* is an HTML attribute that receives an array of arrays. For example:
+````html
+<div class="map" data-locations="[%Marker1Values%], [%Marker2Values%], [%Marker3Values%]"></div>
+````
+where every *%Marker1Values%* has as first value the **Latitude**, and as second value the **Longidude** of the marker you want to set.
 
 ## Additional options:
 * ***Override* the map's language** that anyway gets the browser's language as default: `culture` (*string*);
 * **Change the default html attributes** with:
-    * `latitudeAttr` *(string)*: lets you change the default attribute for map's latitude,
-    * `longitudeAttr` *(string)*: lets you change the default attribute for map's longitude,
+    * `locationAttr` *(string[])*: lets you change the default attribute for map's latitude and longitude,
     * `zoomAttr` *(string)*: lets you change the default attribute for map's zoom;
 * **Add an attribute to whitelist**, preventing it to be deleted when the map is initialized: `keepAttributes` *( string[] )*;
 
