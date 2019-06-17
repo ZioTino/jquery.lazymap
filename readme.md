@@ -28,7 +28,7 @@ $('.map').lazymap({
 ````html
 <div class="map" data-locations="[%Marker1Values%], [%Marker2Values%], [%Marker3Values%]"></div>
 ````
-where every *%Marker1Values%* has as first value the **Latitude**, and as second value the **Longidude** of the marker you want to set.
+where every *%MarkerValue%* has as first value the **Latitude**, and as second value the **Longidude** of the marker you want to set.
 
 ## Additional options:
 * ***Override* the map's language** that anyway gets the browser's language as default: `culture` (*string*);
