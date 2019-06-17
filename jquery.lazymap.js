@@ -15,6 +15,7 @@ window.gmapScriptLoaded = function(){
                 latitudeAttr: 'data-lat',
                 longitudeAttr: 'data-lng',
                 zoomAttr: 'data-zoom',
+                locationAttr: 'data-locations',
                 keepAttributes: ['class'],
                 apiKey: '',
                 culture: ''
@@ -81,6 +82,19 @@ window.gmapScriptLoaded = function(){
                     O.latitude = parseFloat($(obj).attr($settings.latitudeAttr));
                     O.longitude = parseFloat($(obj).attr($settings.longitudeAttr));
                     O.zoom = parseInt($(obj).attr($settings.zoomAttr));
+                    // Here goes the new logic
+                    var settingsToParse = $(obj).attr($settings.locationAttr).split("], ");
+                    var index = 0;
+                    const values = [];
+                    settingsToParse.forEach(function(el) {
+                        if ((index + 1) < settingsToParse.length) {
+                            el = el + "]";
+                        }
+                        values[index] = JSON.parse(el);
+                        index++;
+                    });
+                    console.log(values);
+                    // Here ends the new logic
                     var position = new google.maps.LatLng(O.latitude, O.longitude);
                     var map = new google.maps.Map(obj, {
                         center: position,
