@@ -12,8 +12,6 @@ window.gmapScriptLoaded = function(){
             apiScriptLoaded = false,
             apiScriptLoading = false,
             $settings = $.extend({
-                latitudeAttr: 'data-lat',
-                longitudeAttr: 'data-lng',
                 zoomAttr: 'data-zoom',
                 locationAttr: 'data-locations',
                 keepAttributes: ['class'],
@@ -52,8 +50,8 @@ window.gmapScriptLoaded = function(){
             var obj = this;
             if (this.lazymap || !$(this).hasClass('map')) return;
             obj.lazymap = {
-                latitude: 0,
-                longitude: 0,
+                // latitude: 0,
+                // longitude: 0,
                 zoom: 0,
                 removeData: function(A) {
                     var attributes = $.map(A.attributes, function(item) {
@@ -79,13 +77,11 @@ window.gmapScriptLoaded = function(){
                         apiScriptLoading = true;
                     }
                     if( !apiScriptLoaded ) return true;
-                    O.latitude = parseFloat($(obj).attr($settings.latitudeAttr));
-                    O.longitude = parseFloat($(obj).attr($settings.longitudeAttr));
                     O.zoom = parseInt($(obj).attr($settings.zoomAttr));
-                    // Here goes the new logic
+
                     var settingsToParse = $(obj).attr($settings.locationAttr).split("], ");
                     var index = 0;
-                    const values = [];
+                    var values = [];
                     settingsToParse.forEach(function(el) {
                         if ((index + 1) < settingsToParse.length) {
                             el = el + "]";
@@ -93,19 +89,22 @@ window.gmapScriptLoaded = function(){
                         values[index] = JSON.parse(el);
                         index++;
                     });
-                    console.log(values);
-                    // Here ends the new logic
-                    var position = new google.maps.LatLng(O.latitude, O.longitude);
+
+                    var position = new google.maps.LatLng(values[0][0], values[0][1]);
                     var map = new google.maps.Map(obj, {
                         center: position,
                         zoom: O.zoom
                     });
-                    var marker = new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        animation: google.maps.Animation.DROP,
-                        icon: ''  
+
+                    values.forEach(function(val) {
+                        var tmp = new google.maps.Marker({
+                            position: new google.maps.LatLng(val[0], val[1]),
+                            map: map,
+                            animation: google.maps.Animation.DROP,
+                            icon: ''  
+                        }); 
                     });
+                    
                     O.removeData(obj);
                     $(obj).addClass("loaded");
                 },
