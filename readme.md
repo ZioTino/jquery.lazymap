@@ -33,7 +33,7 @@ where every *%MarkerValue%* has as first value the **Latitude**, and as second v
 ## Additional options:
 * ***Override* the map's language** that anyway gets the browser's language as default: `culture` (*string*);
 * **Change the default html attributes** with:
-    * `locationAttr` *(string[])*: lets you change the default attribute for map's latitude and longitude,
+    * `locationAttr` *(string)*: lets you change the default attribute for map's latitude and longitude,
     * `zoomAttr` *(string)*: lets you change the default attribute for map's zoom;
 * **Add an attribute to whitelist**, preventing it to be deleted when the map is initialized: `keepAttributes` *( string[] )*;
 
