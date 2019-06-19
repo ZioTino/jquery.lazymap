@@ -1,0 +1,28 @@
+{
+  "name": "jquery.lazymap",
+  "version": "1.0.0",
+  "description": "jQuery plugin that loads any google map API when it's in the viewport.",
+  "main": "jquery.lazymap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZioTino/jquery.lazymap.git"
+  },
+  "keywords": [
+    "lazy-loading",
+    "google-maps-api",
+    "lazyload",
+    "google-maps",
+    "google-api",
+    "loading"
+  ],
+  "author": "ZioTino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZioTino/jquery.lazymap/issues"
+  },
+  "homepage": "https://ziotino.github.io/jquery.lazymap/",
+  "dependencies": {}
+}
